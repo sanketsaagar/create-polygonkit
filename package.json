@@ -1,0 +1,48 @@
+{
+  "name": "create-polygon-kit",
+  "version": "0.1.0",
+  "description": "CLI tool to create PolygonKit projects",
+  "type": "module",
+  "bin": {
+    "create-polygon-kit": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "polygon",
+    "polygonkit",
+    "web3",
+    "blockchain",
+    "cli",
+    "create",
+    "scaffold"
+  ],
+  "author": "Sanket Saagar",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanketsaagar/create-polygon-kit.git"
+  },
+  "dependencies": {
+    "prompts": "^2.4.2",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/prompts": "^2.4.9",
+    "@types/fs-extra": "^11.0.4",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
