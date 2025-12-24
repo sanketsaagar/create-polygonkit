@@ -1,4 +1,4 @@
-# PolygonKit Vite App
+# PolygonKit Remix App
 
 This project was created with [create-polygon-kit](https://github.com/sanketsaagar/create-polygon-kit).
 
@@ -33,14 +33,15 @@ Open [http://localhost:5173](http://localhost:5173) with your browser to see the
 
 ## Learn More
 
-To learn more about PolygonKit, check out the following resources:
+To learn more about PolygonKit and Remix, check out the following resources:
 
 - [PolygonKit Documentation](https://docs.polygonkit.com) - learn about PolygonKit features and API
+- [Remix Documentation](https://remix.run/docs) - learn about Remix features and API
 - [GitHub Repository](https://github.com/sanketsaagar/polygonKit) - source code and issues
 
 ## Built With
 
-- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [Remix](https://remix.run/) - Full stack web framework
 - [React](https://react.dev/) - The library for web and native user interfaces
 - [PolygonKit](https://docs.polygonkit.com) - React components for Polygon apps
 - [TailwindCSS](https://tailwindcss.com/) - A utility-first CSS framework

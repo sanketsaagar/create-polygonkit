@@ -1,6 +1,4 @@
-'use client';
-
-import {
+  
   Wallet,
   ConnectWallet,
   WalletDropdown,
@@ -155,7 +153,6 @@ function Dashboard() {
   const [txHash, setTxHash] = useState<string>('');
 
   const getNetworkName = (chainId?: number) => {
-    if (!chainId) return 'Not Connected';
     switch (chainId) {
       case 137:
         return 'Polygon PoS';
@@ -163,18 +160,8 @@ function Dashboard() {
         return 'Polygon zkEVM';
       case 80002:
         return 'Amoy Testnet';
-      case 1:
-        return 'Ethereum Mainnet';
-      case 11155111:
-        return 'Sepolia Testnet';
-      case 8453:
-        return 'Base';
-      case 10:
-        return 'Optimism';
-      case 42161:
-        return 'Arbitrum One';
       default:
-        return `Chain ${chainId}`;
+        return 'Unknown Network';
     }
   };
 
@@ -441,8 +428,5 @@ function Dashboard() {
   );
 }
 
-export default function Home() {
+function AppContent() {
   const { isConnected } = usePolygonKit();
-
-  return isConnected ? <Dashboard /> : <LandingPage />;
-}

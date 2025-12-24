@@ -4,7 +4,26 @@ This project was created with [create-polygon-kit](https://github.com/sanketsaag
 
 ## Getting Started
 
-First, run the development server:
+### 1. Set up your Reown Project ID
+
+This app uses Reown (formerly WalletConnect) for wallet connections. You'll need a free project ID:
+
+1. Go to [cloud.reown.com](https://cloud.reown.com) and create a free account
+2. Create a new project
+3. Copy your Project ID
+4. Create a `.env.local` file in the root directory:
+
+```bash
+cp .env.local.example .env.local
+```
+
+5. Add your project ID to `.env.local`:
+
+```bash
+NEXT_PUBLIC_REOWN_PROJECT_ID=your_project_id_here
+```
+
+### 2. Run the development server
 
 ```bash
 npm run dev

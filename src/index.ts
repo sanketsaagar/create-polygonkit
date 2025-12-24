@@ -13,8 +13,7 @@ const __dirname = path.dirname(__filename);
 
 interface ProjectOptions {
   projectName: string;
-  framework: 'nextjs' | 'vite';
-  typescript: boolean;
+  framework: 'nextjs' | 'vite' | 'remix';
   installDeps: boolean;
 }
 
@@ -71,14 +70,9 @@ async function main() {
       choices: [
         { title: 'Next.js', value: 'nextjs', description: 'React framework with SSR' },
         { title: 'Vite', value: 'vite', description: 'Fast build tool with HMR' },
+        { title: 'Remix', value: 'remix', description: 'Full stack web framework' },
       ],
       initial: 0,
-    },
-    {
-      type: 'confirm',
-      name: 'typescript',
-      message: 'Would you like to use TypeScript?',
-      initial: true,
     },
     {
       type: 'confirm',
@@ -103,7 +97,7 @@ async function main() {
 }
 
 async function createProject(options: ProjectOptions) {
-  const { projectName, framework, typescript, installDeps } = options;
+  const { projectName, framework, installDeps } = options;
 
   const spinner = ora('Creating project...').start();
 
@@ -114,7 +108,7 @@ async function createProject(options: ProjectOptions) {
       '..',
       'templates',
       framework,
-      typescript ? 'typescript' : 'javascript'
+      'typescript'
     );
 
     // Check if template exists
@@ -126,6 +120,14 @@ async function createProject(options: ProjectOptions) {
 
     // Copy template
     await fs.copy(templateDir, targetDir);
+
+    // Explicitly copy env example file
+    const envExampleName = framework === 'nextjs' ? '.env.local.example' : '.env.example';
+    const envExampleSource = path.join(templateDir, envExampleName);
+    const envExampleTarget = path.join(targetDir, envExampleName);
+    if (fs.existsSync(envExampleSource)) {
+      await fs.copy(envExampleSource, envExampleTarget);
+    }
 
     // Update package.json with project name
     const packageJsonPath = path.join(targetDir, 'package.json');
@@ -152,7 +154,20 @@ async function createProject(options: ProjectOptions) {
 
     // Show success message
     console.log(chalk.bold.green('\n✨ Your PolygonKit project is ready!\n'));
-    console.log('Next steps:');
+
+    // Environment setup guidance
+    console.log(chalk.bold.yellow('⚠️  Important: Set up your Reown Project ID\n'));
+    console.log('1. Get a free project ID from ' + chalk.cyan('https://cloud.reown.com'));
+    console.log('2. Copy the env example file:');
+    if (framework === 'nextjs') {
+      console.log(chalk.cyan('   cp .env.local.example .env.local'));
+      console.log('3. Add your project ID to ' + chalk.cyan('.env.local'));
+    } else {
+      console.log(chalk.cyan('   cp .env.example .env'));
+      console.log('3. Add your project ID to ' + chalk.cyan('.env'));
+    }
+
+    console.log(chalk.bold('\nNext steps:'));
     console.log(chalk.cyan(`  cd ${projectName}`));
     if (!installDeps) {
       console.log(chalk.cyan('  npm install'));
